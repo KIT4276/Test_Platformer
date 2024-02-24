@@ -16,5 +16,9 @@ namespace Platformer
         public void Win() => 
             _text.text = _timer.Min.ToString() + " : " + _timer.Sec.ToString();
 
+        private void OnDestroy()
+        {
+            Debug.Log("OnDestroy " + this.name);
+        }
     }
 }

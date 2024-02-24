@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Platformer.Logic
 {
-    public class SceneLoader 
+    public class SceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Platformer
+namespace Platformer.Triggers
 {
     public abstract class Trap : MonoBehaviour
     {
@@ -9,16 +9,21 @@ namespace Platformer
 
         protected const string PlayerTag = "Player";
 
-        protected void Start()
-        {
+        protected bool _isActive;
+
+        protected GameObject _player;
+
+        protected void Start() => 
             _collider.isTrigger = true;
-        }
 
         protected void OnTriggerEnter(Collider other)
         {
             Debug.Log("Enter to " + this.name);
             if (other.CompareTag(PlayerTag))
+            {
+                _player = other.gameObject;
                 LaunchTrap();
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -30,5 +35,6 @@ namespace Platformer
 
         protected abstract void StopTrap();
         protected abstract void LaunchTrap();
+
     }
 }

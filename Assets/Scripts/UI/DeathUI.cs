@@ -40,7 +40,11 @@ namespace Platformer.UI
             }
 
             yield return new WaitForSeconds(2f);
+            
             _death.EndDeath();
         }
+
+        private void OnDestroy() => 
+            _death.OnDeadE -= Show;
     }
 }

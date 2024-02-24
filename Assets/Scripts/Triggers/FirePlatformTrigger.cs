@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-namespace Platformer
+namespace Platformer.Triggers
 {
     public class FirePlatformTrigger : Trap
     {
@@ -24,23 +24,33 @@ namespace Platformer
         private float _fireTime = 0.1f;
         [SerializeField]
         private float _damage = 5;
+        [SerializeField]
+        private float _fireDelay = 1;
 
         [Inject]
         private Health _health;
 
-
         private Material[] _meshMaterials = new Material[4];
-        private bool _isActive;
 
-        protected override void LaunchTrap() =>
+        protected override void LaunchTrap()
+        {
+            if(!_isActive)
             StartCoroutine(TrapCoroutine());
+        }
+
+        protected override void StopTrap()
+        {
+            _isActive = false;
+            RemoveMaterial();
+            AddMaterial(_normalMaterial);
+        }
 
         private IEnumerator TrapCoroutine()
         {
             _isActive = true;
             AddMaterial(_activeMaterial);
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_fireDelay);
 
             while (_isActive)
             {
@@ -62,13 +72,6 @@ namespace Platformer
         {
             _meshMaterials[1] = null;
             _mesh.materials = _meshMaterials.Where(t => t != null).ToArray();
-        }
-
-        protected override void StopTrap()
-        {
-            _isActive = false;
-            RemoveMaterial();
-            AddMaterial(_normalMaterial);
         }
     }
 }

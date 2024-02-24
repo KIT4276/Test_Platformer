@@ -22,5 +22,8 @@ namespace Platformer
 
         private void ChangeHealth() => 
             _imageCurrent.fillAmount = _health.CurrentHealth / _health.MaxHealth;
+
+        private void OnDestroy() => 
+            _health.ChangeHealthE -= ChangeHealth;
     }
 }

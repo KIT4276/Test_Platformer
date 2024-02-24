@@ -1,4 +1,5 @@
-﻿using Platformer.States;
+﻿using Platformer.Logic;
+using Platformer.States;
 using System;
 
 namespace Platformer.Service
@@ -7,19 +8,23 @@ namespace Platformer.Service
     {
         private readonly Health _health;
         private readonly StateMachine _stateMachine;
+        private readonly LoadingCurtain _curtain;
 
         public event Action OnDeadE;
 
-        public Death(Health health, StateMachine stateMachine)
+        public Death(Health health, StateMachine stateMachine, LoadingCurtain curtain)
         {
             _health = health;
             _stateMachine = stateMachine;
-
+            _curtain = curtain;
             _health.ChangeHealthE += CheckHealth;
         }
 
-        public void EndDeath() => 
+        public void EndDeath()
+        {
+            _health.Restart();
             _stateMachine.Enter<BootstrapState>();
+        }
 
         private void CheckHealth()
         {
