@@ -6,7 +6,7 @@ using Platformer.Units.Player;
 using System;
 using UnityEngine;
 
-namespace Platformer
+namespace Platformer.Factories
 {
     public class GameFactory : IService
     {

@@ -1,4 +1,5 @@
-﻿using Platformer.Logic;
+﻿using Platformer.Factories;
+using Platformer.Logic;
 
 namespace Platformer.States
 {
