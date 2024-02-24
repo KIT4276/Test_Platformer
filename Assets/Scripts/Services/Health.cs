@@ -1,8 +1,4 @@
-using Platformer.Player;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Platformer.Service
 {
@@ -13,11 +9,17 @@ namespace Platformer.Service
 
         public event Action ChangeHealthE;
 
-
         public Health()
         {
             MaxHealth = 100; // перенести в статы
             CurrentHealth = MaxHealth;
+            ChangeHealthE?.Invoke();
+        }
+
+        public void SetDamage(float damage)
+        {
+            CurrentHealth -= damage;
+            ChangeHealthE?.Invoke();
         }
     }
 }
