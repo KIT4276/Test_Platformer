@@ -83,6 +83,7 @@ MonoBehaviour:
   _reloadTime: 3
   _fireTime: 0.1
   _damage: 10
+  _fireDelay: 1
 --- !u!1 &8907129829278534932
 GameObject:
   m_ObjectHideFlags: 0

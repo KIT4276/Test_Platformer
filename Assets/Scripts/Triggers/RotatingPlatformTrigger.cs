@@ -27,7 +27,7 @@ namespace Platformer.Triggers
         {
             if (!_isActive)
                 _durationIndex = Random.Range(1, 5);
-            Debug.Log(_durationIndex);
+            
             _isActive = true;
         }
 

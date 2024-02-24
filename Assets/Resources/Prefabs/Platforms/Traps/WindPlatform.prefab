@@ -182,5 +182,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 7748717401131838967}
-  _windForce: 0.9
+  _windForce: 0.7
   _changeDirectionTime: 2

@@ -1,5 +1,6 @@
 using Platformer.Service;
 using Platformer.Service.Input;
+using System;
 using UnityEngine;
 
 namespace Platformer.Player
@@ -69,5 +70,12 @@ namespace Platformer.Player
                 _isTouchGround = true;
         }
 
+        internal void SlowDown(float value)
+        {
+            _playerSpeed -= value;
+
+            if (_playerSpeed < 0)
+                _playerSpeed = 0;
+        }
     }
 }
