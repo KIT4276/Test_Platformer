@@ -7,7 +7,7 @@ namespace Platformer
     public class EntryPoint : MonoBehaviour
     {
         [Inject]
-        DiContainer _container;
+        private DiContainer _container;
 
         private void Start()
         {

@@ -3,7 +3,6 @@ using Platformer.Service.Input;
 using Platformer.Triggers;
 using System;
 using UnityEngine;
-using UnityEngine.Windows;
 
 namespace Platformer.States
 {

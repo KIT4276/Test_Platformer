@@ -13,6 +13,13 @@ namespace Platformer.Installers
         [SerializeField]
         private GameObject _entryPointPrefab;
 
+        [SerializeField]
+        private GameObject _playerPrefab;
+        [SerializeField]
+        private GameObject _hudPrefab;
+        [SerializeField]
+        private GameObject _startMenuPrefab;
+
         private const string Curtain = "Curtain";
         private const string Infrastructure = "Infrastructure";
         private const string EntryPoint = "EntryPoint";
@@ -47,7 +54,8 @@ namespace Platformer.Installers
         private void BindFactories()
         {
             Container.BindInterfacesAndSelfTo<StateFactory>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<GameFactory>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameFactory>().AsSingle().
+                WithArguments(_playerPrefab, _hudPrefab, _startMenuPrefab).NonLazy();
         }
 
         private void InstallSceneLoader() => 

@@ -46,6 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _curtainPrefab: {fileID: 8493594776518678524, guid: 6f4cf927d2d67ce4c8fe0cb6ceed3d9e, type: 3}
   _entryPointPrefab: {fileID: 2678113589665379903, guid: 62f7b6192b68a43478bcf6505db3ed99, type: 3}
+  _playerPrefab: {fileID: 3187477010015734958, guid: a286f6d4eb147974dbd4150b924fc133, type: 3}
+  _hudPrefab: {fileID: 188881087513000827, guid: c8127086996c9d549a6a2502f63fc9c9, type: 3}
+  _startMenuPrefab: {fileID: 4269048099873390238, guid: f1cd77b4ece9c124c8423802fae8ee73, type: 3}
 --- !u!1 &6886064092637678073
 GameObject:
   m_ObjectHideFlags: 0

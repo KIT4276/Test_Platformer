@@ -20,13 +20,10 @@ namespace Platformer.States
             _gameFactory = gameFactory;
         }
 
-        public void Enter() => 
+        public void Enter() =>
             _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
 
-        public void Exit()
-        {
-
-        }
+        public void Exit() { }
 
         private void EnterLoadLevel()
         {

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Platformer.Triggers
@@ -7,11 +6,9 @@ namespace Platformer.Triggers
     {
         [SerializeField]
         private GameObject _finMessage;
-
-        
-
         protected override void TriggerEnter()
         {
+            _finMessage.transform.parent = null;
             _finMessage.SetActive(true);
         }
     }
