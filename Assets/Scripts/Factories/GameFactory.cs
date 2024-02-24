@@ -32,10 +32,11 @@ namespace Platformer.Factories
             return PlayerGameObject;
         }
 
-        public GameObject CreateHud(StartTrigger startTrigger, FinishTrigger finishTrigger)
+        public GameObject CreateHud(GameObject player)
         {
             GameObject hud = UnityEngine.Object.Instantiate(_hudPrefab);
-            hud.GetComponent<TimerUI>().Init(startTrigger, finishTrigger);
+            hud.GetComponent<Hud>().Init(player);
+            //hud.GetComponent<TimerUI>().Init(startTrigger, finishTrigger);
             return hud;
         }
 

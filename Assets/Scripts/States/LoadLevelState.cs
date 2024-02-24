@@ -1,5 +1,6 @@
 ﻿using Platformer.Factories;
 using Platformer.Logic;
+using Platformer.Service;
 using Platformer.Service.Input;
 using Platformer.Triggers;
 using System;
@@ -18,16 +19,18 @@ namespace Platformer.States
         private readonly LoadingCurtain _curtain;
         private readonly GameFactory _gameFactory;
         private readonly IInputService _input;
+        private readonly Timer _timer;
         private GameObject _playerObj;
 
         public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, 
-            LoadingCurtain curtain, GameFactory gameFactory, IInputService input)
+            LoadingCurtain curtain, GameFactory gameFactory, IInputService input, Timer timer)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
             _gameFactory = gameFactory;
             _input = input;
+            _timer = timer;
         }
 
         public void Enter(string sceneName)
@@ -52,14 +55,23 @@ namespace Platformer.States
             InitHud(_playerObj);
 
             CameraFollow(_playerObj);
+
+            InitTimer();
         }
 
-        private void InitHud(GameObject playerObj)
+        private void InitTimer()
         {
             var start = GameObject.FindWithTag(StartTag).GetComponent<StartTrigger>();
             var fin = GameObject.FindWithTag(FinTag).GetComponent<FinishTrigger>();
 
-            _gameFactory.CreateHud(start, fin);
+            _timer.Init(start, fin);
+        }
+
+        private void InitHud(GameObject playerObj)
+        {
+            
+
+            _gameFactory.CreateHud(_playerObj);
         }
 
         private GameObject InitPlayer() =>

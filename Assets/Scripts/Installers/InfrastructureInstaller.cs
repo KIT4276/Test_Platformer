@@ -1,5 +1,6 @@
 using Platformer.Factories;
 using Platformer.Logic;
+using Platformer.Service;
 using Platformer.Service.Input;
 using UnityEngine;
 using Zenject;
@@ -49,6 +50,8 @@ namespace Platformer.Installers
         {
             Container.BindInterfacesAndSelfTo<LoadingCurtain>().FromComponentInNewPrefab(_curtainPrefab).
             WithGameObjectName(Curtain).UnderTransformGroup(Infrastructure).AsSingle().NonLazy();
+
+            Container.BindInterfacesAndSelfTo<Timer>().FromNew().AsSingle().NonLazy();
         }
 
         private void BindFactories()
