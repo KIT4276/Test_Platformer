@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - InitialPoint
+  - LoadingCurtain
+  - StartTrigger
+  - FinishTrigger
   layers:
   - Default
   - TransparentFX

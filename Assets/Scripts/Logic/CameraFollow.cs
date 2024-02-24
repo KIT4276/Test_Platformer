@@ -1,10 +1,10 @@
+using System;
 using UnityEngine;
 
 namespace Platformer.Logic
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField]
         private Transform _folowing;
 
         [Space, SerializeField]
@@ -15,6 +15,9 @@ namespace Platformer.Logic
         private float OffsetY = 5;
         [SerializeField]
         private float _speed = 2;
+
+        public void Follow(Transform transform) => 
+            _folowing = transform;
 
         private void LateUpdate()
         {
