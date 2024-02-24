@@ -153,6 +153,7 @@ MonoBehaviour:
   _playerSpeed: 2
   _jumpHeight: 1
   _gravityValue: 9.81
+  _minY: -0.5
 --- !u!54 &7435304741456556226
 Rigidbody:
   m_ObjectHideFlags: 0

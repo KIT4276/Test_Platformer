@@ -1,8 +1,7 @@
 using Platformer.Service;
 using Platformer.Service.Input;
-using Platformer.Triggers;
 using Platformer.UI;
-using Platformer.Units.Player;
+using Platformer.Player;
 using System;
 using UnityEngine;
 
@@ -13,22 +12,24 @@ namespace Platformer.Factories
         private readonly GameObject _playerPrefab;
         private readonly GameObject _hudPrefab;
         private readonly GameObject _startMenuPrefab;
+        private readonly Health _health;
 
         public event Action PlayerCreated;
 
         public GameObject PlayerGameObject { get; private set; }
 
-        public GameFactory(GameObject playerPrefab, GameObject hudPrefab, GameObject startMenuPrefab)
+        public GameFactory(GameObject playerPrefab, GameObject hudPrefab, GameObject startMenuPrefab, Health health)
         {
             _playerPrefab = playerPrefab;
             _hudPrefab = hudPrefab;
             _startMenuPrefab = startMenuPrefab;
+            _health = health;
         }
 
         public GameObject CreatePlayerAt(GameObject at, IInputService input)
         {
             PlayerGameObject = UnityEngine.Object.Instantiate(_playerPrefab, at.transform.position, at.transform.rotation);
-            PlayerGameObject.GetComponent<PlayerMove>().Init(input);
+            PlayerGameObject.GetComponent<PlayerMove>().Init(input, _health);
             return PlayerGameObject;
         }
 
@@ -36,7 +37,6 @@ namespace Platformer.Factories
         {
             GameObject hud = UnityEngine.Object.Instantiate(_hudPrefab);
             hud.GetComponent<Hud>().Init(player);
-            //hud.GetComponent<TimerUI>().Init(startTrigger, finishTrigger);
             return hud;
         }
 

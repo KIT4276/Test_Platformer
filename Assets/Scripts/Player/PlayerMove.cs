@@ -1,8 +1,7 @@
 using Platformer.Service.Input;
-using System;
 using UnityEngine;
 
-namespace Platformer.Units.Player
+namespace Platformer.Player
 {
     public class PlayerMove : MonoBehaviour
     {
@@ -16,14 +15,20 @@ namespace Platformer.Units.Player
         private float _jumpHeight = 1.0f;
         [SerializeField]
         private float _gravityValue = 9.81f;
+        [SerializeField]
+        private float _minY = 0;
 
         private Vector3 _playerVelocity;
+        private Health _health;
         private IInputService _input;
         private Vector3 _move;
         private bool _isTouchGround = true;
 
-        public void Init(IInputService input) => 
+        public void Init(IInputService input, Health health)
+        {
+            _health = health;
             _input = input;
+        }
 
         void Update()
         {
@@ -52,6 +57,9 @@ namespace Platformer.Units.Player
 
             _playerVelocity.y += -_gravityValue * Time.deltaTime;
             _controller.Move(_playerVelocity * Time.deltaTime);
+
+            if (transform.position.y <= _minY)
+                _health.Fall();
         }
 
         private void OnCollisionEnter(Collision collision)
