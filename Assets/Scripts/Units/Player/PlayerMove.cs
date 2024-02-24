@@ -1,4 +1,5 @@
 using Platformer.Service.Input;
+using System;
 using UnityEngine;
 
 namespace Platformer.Units.Player
@@ -21,8 +22,8 @@ namespace Platformer.Units.Player
         private Vector3 _move;
         private bool _isTouchGround = true;
 
-        private void Start() =>// Compile the architecture has not yet been created
-            _input = DefineInputService();
+        public void Init(IInputService input) => 
+            _input = input;
 
         void Update()
         {
@@ -59,12 +60,5 @@ namespace Platformer.Units.Player
                 _isTouchGround = true;
         }
 
-        private static IInputService DefineInputService()// Compile the architecture has not yet been created
-        {
-            if (Application.isEditor)
-                return new StandaloneInputService();
-            else
-                return new MobileInputService();
-        }
     }
 }

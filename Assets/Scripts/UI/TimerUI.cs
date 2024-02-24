@@ -8,16 +8,18 @@ namespace Platformer.UI
     {
         [SerializeField]
         private TextMeshProUGUI _text;
-        [SerializeField]
+
         private StartTrigger _startTrigger;
-        [SerializeField]
         private FinishTrigger _finishTrigger;
 
         private float _time;
         private bool _isSterted;
 
-        private void Start()
+        internal void Init(StartTrigger startTrigger, FinishTrigger finishTrigger)
         {
+            _startTrigger = startTrigger;
+            _finishTrigger = finishTrigger;
+
             _startTrigger.MainGameTriggerEnteredE += StartTimer;
         }
 
@@ -42,7 +44,6 @@ namespace Platformer.UI
                 _time += Time.deltaTime;
                 _text.text = _time.ToString("00.00");
             }
-            
         }
     }
 }
