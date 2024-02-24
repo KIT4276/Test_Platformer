@@ -4,19 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Platformer
+namespace Platformer.Service
 {
-    public class Health 
+    public class Health  : IService
     {
         public float MaxHealth { get; private set; }
         public float CurrentHealth { get; private set; }
 
         public event Action ChangeHealthE;
 
-        internal void Fall()
+
+        public Health()
         {
-            CurrentHealth = 0;
-            ChangeHealthE?.Invoke();
+            MaxHealth = 100; // перенести в статы
+            CurrentHealth = MaxHealth;
         }
     }
 }

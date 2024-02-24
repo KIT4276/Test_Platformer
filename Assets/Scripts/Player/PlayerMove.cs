@@ -1,3 +1,4 @@
+using Platformer.Service;
 using Platformer.Service.Input;
 using UnityEngine;
 
@@ -19,14 +20,14 @@ namespace Platformer.Player
         private float _minY = 0;
 
         private Vector3 _playerVelocity;
-        private Health _health;
+        private Death _deth;
         private IInputService _input;
         private Vector3 _move;
         private bool _isTouchGround = true;
 
-        public void Init(IInputService input, Health health)
+        public void Init(IInputService input, Death deth)
         {
-            _health = health;
+            _deth = deth;
             _input = input;
         }
 
@@ -59,7 +60,7 @@ namespace Platformer.Player
             _controller.Move(_playerVelocity * Time.deltaTime);
 
             if (transform.position.y <= _minY)
-                _health.Fall();
+                _deth.OnDead();
         }
 
         private void OnCollisionEnter(Collision collision)

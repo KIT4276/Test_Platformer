@@ -1,4 +1,4 @@
-using System;
+using Platformer.Service;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -13,11 +13,10 @@ namespace Platformer
         [Inject]
         private Health _health;
 
-        //public void SetValue(float current, float max) =>
-        //    ImageCurrent.fillAmount = current / max;
-
-        private void Start()
+        public void Init(Health health)
         {
+            _health = health;
+
             _health.ChangeHealthE += ChangeHealth;
         }
 
