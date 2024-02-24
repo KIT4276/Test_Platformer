@@ -18,7 +18,7 @@ namespace Platformer.Triggers
 
         protected void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Enter to " + this.name);
+            //Debug.Log("Enter to " + this.name);
             if (other.CompareTag(PlayerTag))
             {
                 _player = other.gameObject;
@@ -28,7 +28,7 @@ namespace Platformer.Triggers
 
         private void OnTriggerExit(Collider other)
         {
-            Debug.Log("Exit from " + this.name);
+            //Debug.Log("Exit from " + this.name);
             if (other.CompareTag(PlayerTag))
                 StopTrap();
         }
