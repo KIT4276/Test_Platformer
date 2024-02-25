@@ -1,5 +1,6 @@
 ﻿using Platformer.Factories;
 using Platformer.Logic;
+using UnityEngine;
 
 namespace Platformer.States
 {
@@ -21,8 +22,11 @@ namespace Platformer.States
             _gameFactory = gameFactory;
         }
 
-        public void Enter() =>
+        public void Enter()
+        {
+            Time.timeScale = 1;
             _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+        }
 
         public void Exit() { }
 

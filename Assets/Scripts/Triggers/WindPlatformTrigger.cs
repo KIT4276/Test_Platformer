@@ -9,6 +9,10 @@ namespace Platformer.Triggers
         private float _windForce = 1;
         [SerializeField]
         private float _changeDirectionTime = 2;
+        [SerializeField]
+        private AudioSource _audio;
+        [SerializeField]
+        private float _audioDecreaseStep = 0.1f;
 
         private bool _isWindStarted;
         private Vector3 _velocity;
@@ -17,12 +21,23 @@ namespace Platformer.Triggers
         {
             _isActive = true;
             StartCoroutine(ChangeDirectionCoroutine());
+            _audio.volume = 0.7f;
         }
 
         protected override void StopTrap()
         {
             _isActive = false;
             StopCoroutine(ChangeDirectionCoroutine());
+            StartCoroutine(AudioCoroutine());
+        }
+
+        private IEnumerator AudioCoroutine()
+        {
+            while (_audio.volume > 0)
+            {
+                _audio.volume -= _audioDecreaseStep;
+                yield return null;
+            }
         }
 
         private IEnumerator ChangeDirectionCoroutine()

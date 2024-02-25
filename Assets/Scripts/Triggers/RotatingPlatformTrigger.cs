@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Platformer.Triggers
 {
@@ -8,6 +9,10 @@ namespace Platformer.Triggers
         private float _rotateSpeed = 1;
         [SerializeField]
         private Transform _platformsTransform;
+        [SerializeField]
+        private AudioSource _audio;
+        [SerializeField]
+        private float _audioDecreaseStep = 0.03f;
 
         private int _durationIndex;
         private Quaternion _targetRotation;
@@ -26,9 +31,12 @@ namespace Platformer.Triggers
         protected override void LaunchTrap()
         {
             if (!_isActive)
+            {
                 _durationIndex = Random.Range(1, 5);
-            
+                _audio.volume = 0.7f;
             _isActive = true;
+            }
+            
         }
 
         private void Update()
@@ -73,6 +81,16 @@ namespace Platformer.Triggers
         protected override void StopTrap()
         {
             _isActive = false;
+            StartCoroutine(AudioCoroutine());
+        }
+
+        private IEnumerator AudioCoroutine()
+        {
+            while (_audio.volume > 0)
+            {
+                _audio.volume -= _audioDecreaseStep;
+                yield return null;
+            }
         }
     }
 }
