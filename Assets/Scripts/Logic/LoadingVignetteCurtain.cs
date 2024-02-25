@@ -27,7 +27,6 @@ namespace Platformer
             
             while (Curtain.alpha < 1)
             {
-                Debug.Log("step)");
                 Curtain.alpha += _step;
                 _audio.volume += _step;
                 yield return new WaitForSeconds(_delay);
