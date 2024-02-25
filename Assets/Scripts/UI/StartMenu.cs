@@ -14,9 +14,10 @@ namespace Platformer.UI
             ContinueGameButtonDown();
         }
 
-        public void ContinueGameButtonDown()
-        {
+        public void ContinueGameButtonDown() => 
             OnStarted?.Invoke();
-        }
+
+        public void ExitGAmeButtoneDown() => 
+            Application.Quit();
     }
 }

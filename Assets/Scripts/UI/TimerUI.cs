@@ -1,4 +1,3 @@
-using Platformer.Triggers;
 using TMPro;
 using UnityEngine;
 
@@ -9,41 +8,56 @@ namespace Platformer.UI
         [SerializeField]
         private TextMeshProUGUI _text;
 
-        private StartTrigger _startTrigger;
-        private FinishTrigger _finishTrigger;
+        /// In case you need to display the timer during the game
+        /// 
 
-        private float _time;
-        private bool _isSterted;
+        //private StartTrigger _startTrigger;
+        //private FinishTrigger _finishTrigger;
 
-        internal void Init(StartTrigger startTrigger, FinishTrigger finishTrigger)
-        {
-            _startTrigger = startTrigger;
-            _finishTrigger = finishTrigger;
+        //private float _time;
+        //private int _sec;
+        //private int _min;
 
-            _startTrigger.MainGameTriggerEnteredE += StartTimer;
-        }
+        //private bool _isStarted;
 
-        private void StartTimer()
-        {
-            _startTrigger.MainGameTriggerEnteredE -= StartTimer;
-            _isSterted = true;
-            _finishTrigger.MainGameTriggerEnteredE += StopTimer;
-        }
+        //public void Init(StartTrigger startTrigger, FinishTrigger finishTrigger)
+        //{
+        //    _startTrigger = startTrigger;
+        //    _finishTrigger = finishTrigger;
 
-        private void StopTimer()
-        {
-            _isSterted = false;
-            _finishTrigger.MainGameTriggerEnteredE -= StopTimer;
-        }
+        //    _startTrigger.MainGameTriggerEnteredE += StartTimer;
+        //}
 
-        private void Update()
-        {
+        //private void StartTimer()
+        //{
+        //    _startTrigger.MainGameTriggerEnteredE -= StartTimer;
+        //    _isStarted = true;
+        //    StartCoroutine(TimeFlow());
+        //    _finishTrigger.MainGameTriggerEnteredE += StopTimer;
+        //}
 
-            if (_isSterted)
-            {
-                _time += Time.deltaTime;
-                _text.text = _time.ToString("00.00");
-            }
-        }
+        //private IEnumerator TimeFlow()
+        //{
+        //    while (_isStarted)
+        //    {
+        //        if (_sec == 59)
+        //        {
+        //            _min++;
+        //            _sec = -1;
+        //        }
+        //        _sec++;
+
+
+        //       yield return new WaitForSeconds(1);
+        //    }
+        //}
+
+        //private void StopTimer()
+        //{
+        //    _isStarted = false;
+        //    StopCoroutine(TimeFlow());
+        //    _finishTrigger.MainGameTriggerEnteredE -= StopTimer;
+        //}
+
     }
 }

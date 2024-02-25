@@ -10,6 +10,7 @@ namespace Platformer.Triggers
         {
             _finMessage.transform.parent = null;
             _finMessage.SetActive(true);
+            _finMessage.GetComponent<WinUI>().Win();
         }
     }
 }

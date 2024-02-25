@@ -20,5 +20,6 @@ namespace Platformer.Triggers
         }
 
         protected abstract void TriggerEnter();
+
     }
 }
