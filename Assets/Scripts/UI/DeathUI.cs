@@ -16,6 +16,9 @@ namespace Platformer.UI
 
         public event Action FadeInE;
 
+        private void Start() => 
+            _curtainObj.SetActive(false);
+
         public void Init(Death death)
         {
             _death = death;
