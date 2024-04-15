@@ -6,8 +6,7 @@ namespace Platformer.UI
 {
     public class Pause : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject _pausePanel;
+        [SerializeField] private GameObject _pausePanel;
 
         private bool _isPaused;
         private StateMachine _stateMachine;
@@ -22,7 +21,7 @@ namespace Platformer.UI
         private void Start() =>
             _pausePanel.gameObject.SetActive(false);
 
-        private void Update() => 
+        private void Update() =>
             ChekInput();
 
         public void OnPause()

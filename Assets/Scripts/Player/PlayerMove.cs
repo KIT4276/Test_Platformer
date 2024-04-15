@@ -19,6 +19,8 @@ namespace Platformer.Player
         private float _gravityValue = 9.81f;
         [SerializeField]
         private float _minY = 0;
+        [SerializeField]
+        private LayerMask _platformLayer;
 
         private Vector3 _playerVelocity;
         private Death _deth;
@@ -70,12 +72,13 @@ namespace Platformer.Player
                 _isTouchGround = true;
         }
 
-        internal void SlowDown(float value)
+        public void SlowDown(float value)
         {
             _playerSpeed -= value;
 
             if (_playerSpeed < 0)
                 _playerSpeed = 0;
         }
+      
     }
 }
