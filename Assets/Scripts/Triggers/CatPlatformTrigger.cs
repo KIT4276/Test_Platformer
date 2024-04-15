@@ -6,12 +6,9 @@ namespace Platformer.Triggers
 {
     public class CatPlatformTrigger : Trap
     {
-        [SerializeField]
-        private float _slowdownPercent = 50;
-        [SerializeField]
-        private LoadingVignetteCurtain _vignette;
-        [SerializeField]
-        private float _speedReturnDelay = 5;
+        [SerializeField] private float _slowdownPercent = 50;
+        [SerializeField] private float _speedReturnDelay = 5;
+        [SerializeField] private LoadingVignetteCurtain _vignette;
 
         protected override void LaunchTrap()
         {

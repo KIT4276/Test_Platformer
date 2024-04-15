@@ -7,29 +7,25 @@ namespace Platformer.UI
 {
     public class DeathUI : MonoBehaviour
     {
-        [SerializeField]
-        private CanvasGroup _curtain;
-        [SerializeField]
-        private GameObject _curtainObj;
+        [SerializeField] private CanvasGroup _curtain;
+        [SerializeField] private GameObject _curtainObj;
 
         private Death _death;
 
         public event Action FadeInE;
 
-        private void Start() => 
+        private void Start() =>
             _curtainObj.SetActive(false);
 
         public void Init(Death death)
         {
             _death = death;
-
             _death.OnDeadE += Show;
         }
 
         public void Show()
         {
             _curtainObj.SetActive(true);
-            
             StartCoroutine(DoFadeIn());
         }
 
@@ -43,11 +39,11 @@ namespace Platformer.UI
             }
 
             yield return new WaitForSeconds(2f);
-            
+
             _death.EndDeath();
         }
 
-        private void OnDestroy() => 
+        private void OnDestroy() =>
             _death.OnDeadE -= Show;
     }
 }

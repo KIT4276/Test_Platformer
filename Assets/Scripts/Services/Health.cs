@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Platformer.Service
 {
@@ -13,14 +12,12 @@ namespace Platformer.Service
         public Health(float maxHealth)
         {
             MaxHealth = maxHealth;
-
             Restart();
         }
 
         public void Restart()
         {
             CurrentHealth = MaxHealth;
-            
             ChangeHealthE?.Invoke();
         }
 

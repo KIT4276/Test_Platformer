@@ -9,19 +9,13 @@ namespace Platformer.Installers
 {
     public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
     {
-        [SerializeField]
-        private GameObject _curtainPrefab;
-        [SerializeField]
-        private GameObject _entryPointPrefab;
+        [SerializeField] private GameObject _curtainPrefab;
+        [SerializeField] private GameObject _entryPointPrefab;
+        [SerializeField] private GameObject _playerPrefab;
+        [SerializeField] private GameObject _hudPrefab;
+        [SerializeField] private GameObject _startMenuPrefab;
 
-        [SerializeField]
-        private GameObject _playerPrefab;
-        [SerializeField]
-        private GameObject _hudPrefab;
-        [SerializeField]
-        private GameObject _startMenuPrefab;
-
-        private const string Curtain = "Curtain";
+        private const string Curtain = "_curtain";
         private const string Infrastructure = "Infrastructure";
         private const string EntryPoint = "EntryPoint";
 
@@ -30,45 +24,67 @@ namespace Platformer.Installers
             InstallInputService();
 
             this.gameObject.SetActive(true);
-            Container.BindInterfacesAndSelfTo<ICoroutineRunner>().FromInstance(this).AsSingle();
 
+            InstallCoroutine();
             InstallSceneLoader();
-
-            BindFactories();
-            BindServices();
-
-            BindEntryPoint();
+            InstallFactories();
+            InstallServices();
+            InstallEntryPoint();
         }
 
-        private void BindEntryPoint()
+        private void InstallCoroutine() =>
+            Container.Bind<ICoroutineRunner>()
+            .FromInstance(this)
+            .AsSingle();
+
+        private void InstallEntryPoint() => 
+            Container.Bind<EntryPoint>()
+                .FromComponentInNewPrefab(_entryPointPrefab)
+                .WithGameObjectName(EntryPoint)
+                .UnderTransformGroup(Infrastructure)
+                .AsSingle()
+                .NonLazy();
+
+        private void InstallServices()
         {
-            Container.BindInterfacesAndSelfTo<EntryPoint>().FromComponentInNewPrefab(_entryPointPrefab).
-           WithGameObjectName(EntryPoint).UnderTransformGroup(Infrastructure).AsSingle().NonLazy();
+            Container.Bind<LoadingCurtain>()
+                .FromComponentInNewPrefab(_curtainPrefab)
+                .WithGameObjectName(Curtain)
+                .UnderTransformGroup(Infrastructure)
+                .AsSingle()
+                .NonLazy();
+
+            Container.Bind<Timer>()
+                .FromNew()
+                .AsSingle()
+                .NonLazy();
         }
 
-        private void BindServices()
+        private void InstallFactories()
         {
-            Container.BindInterfacesAndSelfTo<LoadingCurtain>().FromComponentInNewPrefab(_curtainPrefab).
-            WithGameObjectName(Curtain).UnderTransformGroup(Infrastructure).AsSingle().NonLazy();
+            Container.Bind<StateFactory>()
+                .AsSingle()
+                .NonLazy();
 
-            Container.BindInterfacesAndSelfTo<Timer>().FromNew().AsSingle().NonLazy();
+            Container.Bind<GameFactory>()
+                .AsSingle()
+                .WithArguments(_playerPrefab, _hudPrefab, _startMenuPrefab)
+                .NonLazy();
         }
 
-        private void BindFactories()
-        {
-            Container.BindInterfacesAndSelfTo<StateFactory>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<GameFactory>().AsSingle().
-                WithArguments(_playerPrefab, _hudPrefab, _startMenuPrefab).NonLazy();
-        }
+        private void InstallSceneLoader() =>
+            Container
+            .Bind<SceneLoader>()
+            .FromNew()
+            .AsSingle()
+            .WithArguments(this)
+            .NonLazy();
 
-        private void InstallSceneLoader() => 
-            Container.Bind<SceneLoader>().FromNew().AsSingle().WithArguments(this).NonLazy();
-
-        private void InstallInputService()
-        {
-            IInputService input = DefineInputService();
-            Container.BindInterfacesAndSelfTo<IInputService>().FromInstance(input).AsSingle().NonLazy();
-        }
+        private void InstallInputService() => 
+            Container.Bind<IInputService>()
+            .FromInstance(DefineInputService())
+            .AsSingle()
+            .NonLazy();
 
         private static IInputService DefineInputService()
         {

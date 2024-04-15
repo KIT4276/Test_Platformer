@@ -1,6 +1,5 @@
 using Platformer.Logic;
 using Platformer.Triggers;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +9,7 @@ namespace Platformer.Service
     {
         private StartTrigger _startTrigger;
         private FinishTrigger _finishTrigger;
+
         private readonly ICoroutineRunner _coroutine;
 
         private bool _isStarted;

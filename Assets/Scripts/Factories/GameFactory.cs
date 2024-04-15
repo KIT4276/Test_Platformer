@@ -42,7 +42,6 @@ namespace Platformer.Factories
         public GameObject CreateHud(GameObject player)
         {
             GameObject hud = UnityEngine.Object.Instantiate(_hudPrefab);
-            hud.GetComponent<Hud>().Init(player);
             hud.GetComponent<HealthUI>().Init(_health);
             hud.GetComponent<DeathUI>().Init(_death);
             hud.GetComponent<Pause>().Init(_stateMachine, _health);

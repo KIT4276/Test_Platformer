@@ -8,18 +8,15 @@ namespace Platformer
 {
     public class WinUI : MonoBehaviour
     {
-        [SerializeField]
-        private TextMeshProUGUI _text;
+        [SerializeField] private TextMeshProUGUI _text;
 
-        [Inject]
-        private readonly Timer _timer;
-        [Inject]
-        private readonly StateMachine _stateMachine;
+        [Inject] private readonly Timer _timer;
+        [Inject] private readonly StateMachine _stateMachine;
 
-        public void Win() => 
+        public void Win() =>
             _text.text = _timer.Min.ToString() + " : " + _timer.Sec.ToString();
 
-        public void Restart() => 
+        public void Restart() =>
             _stateMachine.Enter<BootstrapState>();
     }
 }

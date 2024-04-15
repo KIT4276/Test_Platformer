@@ -37,7 +37,7 @@ namespace Platformer.States
         }
 
         private void InstallStartMenu() =>
-        _gameFactory.CreateStartMenu().OnStarted += ContinueLoad;
+            _gameFactory.CreateStartMenu().OnStarted += ContinueLoad;
 
         private void ContinueLoad()
         {

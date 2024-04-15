@@ -4,11 +4,11 @@ namespace Platformer.Triggers
 {
     public class FinishTrigger : MainGameTrigger
     {
-        [SerializeField]
-        private GameObject _finMessage;
+        [SerializeField] private GameObject _finMessage;
 
-        private void Start() => 
+        private void Start() =>
             _finMessage.SetActive(false);
+
         protected override void TriggerEnter()
         {
             _finMessage.transform.parent = null;

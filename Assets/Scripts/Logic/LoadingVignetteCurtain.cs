@@ -5,14 +5,10 @@ namespace Platformer
 {
     public class LoadingVignetteCurtain : MonoBehaviour
     {
-        [SerializeField]
-        private CanvasGroup Curtain;
-        [SerializeField]
-        private float _step = 0.03f;
-        [SerializeField]
-        private float _delay = 0.03f;
-        [SerializeField]
-        private AudioSource _audio;
+        [SerializeField] private CanvasGroup Curtain;
+        [SerializeField] private float _step = 0.03f;
+        [SerializeField] private float _delay = 0.03f;
+        [SerializeField] private AudioSource _audio;
 
         public void HideVignette() =>
             StartCoroutine(DoFadeOut());
@@ -23,7 +19,7 @@ namespace Platformer
         private IEnumerator DoFadeIn()
         {
             _audio.volume = 0;
-            
+
             while (Curtain.alpha < 1)
             {
                 Curtain.alpha += _step;

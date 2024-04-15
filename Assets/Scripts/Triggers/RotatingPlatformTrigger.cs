@@ -5,14 +5,10 @@ namespace Platformer.Triggers
 {
     public class RotatingPlatformTrigger : Trap
     {
-        [SerializeField]
-        private float _rotateSpeed = 1;
-        [SerializeField]
-        private Transform _platformsTransform;
-        [SerializeField]
-        private AudioSource _audio;
-        [SerializeField]
-        private float _audioDecreaseStep = 0.03f;
+        [SerializeField] private float _rotateSpeed = 1;
+        [SerializeField] private Transform _platformsTransform;
+        [SerializeField] private AudioSource _audio;
+        [SerializeField] private float _audioDecreaseStep = 0.03f;
 
         private int _durationIndex;
         private Quaternion _targetRotation;
@@ -34,9 +30,9 @@ namespace Platformer.Triggers
             {
                 _durationIndex = Random.Range(1, 5);
                 _audio.volume = 0.7f;
-            _isActive = true;
+                _isActive = true;
             }
-            
+
         }
 
         private void Update()
@@ -44,7 +40,7 @@ namespace Platformer.Triggers
             if (_isActive)
             {
                 RotationSelection();
-               
+
                 _platformsTransform.rotation = _targetRotation;
             }
         }

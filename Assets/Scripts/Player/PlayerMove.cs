@@ -7,18 +7,12 @@ namespace Platformer.Player
 {
     public class PlayerMove : MonoBehaviour
     {
-        private const string GroundTag = "Ground";
-        [SerializeField]
-        private CharacterController _controller;
-
-        [Space, SerializeField]
-        private float _startSpeed = 2f;
-        [SerializeField]
-        private float _jumpHeight = 1.0f;
-        [SerializeField]
-        private float _gravityValue = 9.81f;
-        [SerializeField]
-        private float _minY = 0;
+        [SerializeField] private CharacterController _controller;
+        [Space]
+        [SerializeField] private float _startSpeed = 2f;
+        [SerializeField] private float _jumpHeight = 1.0f;
+        [SerializeField] private float _gravityValue = 9.81f;
+        [SerializeField] private float _minY = 0;
 
         private float _playerSpeed;
         private Vector3 _playerVelocity;
@@ -27,6 +21,8 @@ namespace Platformer.Player
         private Vector3 _move;
         private bool _isTouchGround = true;
 
+        private const string GroundTag = "Ground";
+
         public void Init(IInputService input, Death deth)
         {
             _deth = deth;
@@ -34,11 +30,24 @@ namespace Platformer.Player
             _playerSpeed = _startSpeed;
         }
 
-        void Update()
+        public void SlowDown(float value)
+        {
+            _playerSpeed -= _playerSpeed * value / 100;
+
+            if (_playerSpeed < 0)
+                _playerSpeed = 0;
+        }
+
+        public void ReturnSpeed()
+        {
+            _playerSpeed = _startSpeed;
+        }
+
+        private void Update()
         {
             if (_controller.isGrounded && _playerVelocity.y < Constants.Epsilon)
                 _playerVelocity.y = 0f;
-            
+
             if (_input.Axis.sqrMagnitude > Constants.Epsilon)
             {
                 _move = Camera.main.transform.TransformDirection(_input.Axis);
@@ -70,19 +79,6 @@ namespace Platformer.Player
         {
             if (collision.gameObject.CompareTag(GroundTag))
                 _isTouchGround = true;
-        }
-
-        public void SlowDown(float value)
-        {
-            _playerSpeed -= _playerSpeed * value/100;
-
-            if (_playerSpeed < 0)
-                _playerSpeed = 0;
-        }
-      
-        public void ReturnSpeed()
-        {
-            _playerSpeed = _startSpeed;
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Platformer.UI
     {
         [SerializeField] private GameObject _pausePanel;
 
-        private bool _isPaused;
         private StateMachine _stateMachine;
         private Health _health;
+        private bool _isPaused;
 
         public void Init(StateMachine stateMachine, Health health)
         {
@@ -18,8 +18,9 @@ namespace Platformer.UI
             _health = health;
         }
 
+       
         private void Start() =>
-            _pausePanel.gameObject.SetActive(false);
+            _pausePanel.SetActive(false);
 
         private void Update() =>
             ChekInput();
@@ -44,7 +45,6 @@ namespace Platformer.UI
         public void Restart()
         {
             _health.Restart();
-
             _stateMachine.Enter<BootstrapState>();
         }
 

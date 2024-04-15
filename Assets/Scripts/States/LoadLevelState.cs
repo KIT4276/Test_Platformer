@@ -52,27 +52,22 @@ namespace Platformer.States
         private void InitGameWorld()
         {
             _playerObj = InitPlayer();
-            InitHud(_playerObj);
 
+            InitHud();
             CameraFollow(_playerObj);
-
             InitTimer();
         }
 
         private void InitTimer()
         {
-            var start = GameObject.FindWithTag(StartTag).GetComponent<StartTrigger>();
-            var fin = GameObject.FindWithTag(FinTag).GetComponent<FinishTrigger>();
+            StartTrigger start = GameObject.FindWithTag(StartTag).GetComponent<StartTrigger>();
+            FinishTrigger fin = GameObject.FindWithTag(FinTag).GetComponent<FinishTrigger>();
 
             _timer.Init(start, fin);
         }
 
-        private void InitHud(GameObject playerObj)
-        {
-            
-
+        private void InitHud() => 
             _gameFactory.CreateHud(_playerObj);
-        }
 
         private GameObject InitPlayer() =>
             _gameFactory.CreatePlayerAt(GameObject.FindWithTag(InitialPointTag), _input);

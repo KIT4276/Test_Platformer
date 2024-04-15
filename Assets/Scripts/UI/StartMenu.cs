@@ -7,12 +7,8 @@ namespace Platformer.UI
     {
         public event Action OnStarted;
 
-        public void StartNewGameButtonDown()
-        {
-            //TODO
-
+        public void StartNewGameButtonDown() => 
             ContinueGameButtonDown();
-        }
 
         public void ContinueGameButtonDown() => 
             OnStarted?.Invoke();

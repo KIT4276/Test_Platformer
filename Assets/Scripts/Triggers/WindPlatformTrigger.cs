@@ -5,14 +5,10 @@ namespace Platformer.Triggers
 {
     public class WindPlatformTrigger : Trap
     {
-        [SerializeField]
-        private float _windForce = 1;
-        [SerializeField]
-        private float _changeDirectionTime = 2;
-        [SerializeField]
-        private AudioSource _audio;
-        [SerializeField]
-        private float _audioDecreaseStep = 0.1f;
+        [SerializeField] private float _windForce = 1;
+        [SerializeField] private float _changeDirectionTime = 2;
+        [SerializeField] private AudioSource _audio;
+        [SerializeField] private float _audioDecreaseStep = 0.1f;
 
         private bool _isWindStarted;
         private Vector3 _velocity;

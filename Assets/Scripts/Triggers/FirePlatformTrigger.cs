@@ -8,29 +8,24 @@ namespace Platformer.Triggers
 {
     public class FirePlatformTrigger : Trap
     {
-        [SerializeField]
-        private MeshRenderer _mesh;
+        [SerializeField] private MeshRenderer _mesh;
+        [Space]
+        [SerializeField] protected Material _normalMaterial;
+        [SerializeField] protected Material _activeMaterial;
+        [SerializeField] protected Material _fireMaterial;
+        [Space]
+        [SerializeField] private float _reloadTime = 5;
+        [SerializeField] private float _fireTime = 0.1f;
+        [SerializeField] private float _damage = 5;
+        [SerializeField] private float _fireDelay = 1;
 
-        [Space, SerializeField]
-        protected Material _normalMaterial;
-        [SerializeField]
-        protected Material _activeMaterial;
-        [SerializeField]
-        protected Material _fireMaterial;
-
-        [SerializeField]
-        private float _reloadTime = 5;
-        [Space, SerializeField]
-        private float _fireTime = 0.1f;
-        [SerializeField]
-        private float _damage = 5;
-        [SerializeField]
-        private float _fireDelay = 1;
-
-        [Inject]
         private Health _health;
 
-        private Material[] _meshMaterials = new Material[4];
+        private readonly Material[] _meshMaterials = new Material[4];
+
+        [Inject]
+        private void PseudConstruct(Health health) =>
+            _health = health;
 
         protected override void LaunchTrap()
         {
@@ -51,7 +46,7 @@ namespace Platformer.Triggers
 
         private IEnumerator TrapCoroutine()
         {
-           
+
             AddMaterial(_activeMaterial);
 
             yield return new WaitForSeconds(_fireDelay);
