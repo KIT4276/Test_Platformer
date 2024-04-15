@@ -14,7 +14,6 @@ namespace Platformer
         [SerializeField]
         private AudioSource _audio;
 
-
         public void HideVignette() =>
             StartCoroutine(DoFadeOut());
 

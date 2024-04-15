@@ -7,7 +7,7 @@ namespace Platformer.Triggers
     public class CatPlatformTrigger : Trap
     {
         [SerializeField]
-        private float _slowdownValue = 1;
+        private float _slowdownPercent = 50;
         [SerializeField]
         private LoadingVignetteCurtain _vignette;
         [SerializeField]
@@ -17,7 +17,7 @@ namespace Platformer.Triggers
         {
             if (!_isActive)
             {
-                _player.GetComponent<PlayerMove>().SlowDown(_slowdownValue);
+                _player.GetComponent<PlayerMove>().SlowDown(_slowdownPercent);
                 _isActive = true;
                 _vignette.ShowVignette();
             }
@@ -36,7 +36,7 @@ namespace Platformer.Triggers
         {
             yield return new WaitForSeconds(_speedReturnDelay);
             _vignette.HideVignette();
-            _player.GetComponent<PlayerMove>().SlowDown(-_slowdownValue);
+            _player.GetComponent<PlayerMove>().ReturnSpeed();
         }
     }
 }

@@ -34,20 +34,24 @@ namespace Platformer.Triggers
 
         protected override void LaunchTrap()
         {
-            if(!_isActive)
-            StartCoroutine(TrapCoroutine());
+            if (!_isActive)
+            {
+                _isActive = true;
+                StartCoroutine(TrapCoroutine());
+            }
         }
 
         protected override void StopTrap()
         {
             _isActive = false;
+            StopAllCoroutines();
             RemoveMaterial();
             AddMaterial(_normalMaterial);
         }
 
         private IEnumerator TrapCoroutine()
         {
-            _isActive = true;
+           
             AddMaterial(_activeMaterial);
 
             yield return new WaitForSeconds(_fireDelay);

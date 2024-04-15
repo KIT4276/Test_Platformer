@@ -12,16 +12,15 @@ namespace Platformer.Player
         private CharacterController _controller;
 
         [Space, SerializeField]
-        private float _playerSpeed = 2.0f;
+        private float _startSpeed = 2f;
         [SerializeField]
         private float _jumpHeight = 1.0f;
         [SerializeField]
         private float _gravityValue = 9.81f;
         [SerializeField]
         private float _minY = 0;
-        [SerializeField]
-        private LayerMask _platformLayer;
 
+        private float _playerSpeed;
         private Vector3 _playerVelocity;
         private Death _deth;
         private IInputService _input;
@@ -32,6 +31,7 @@ namespace Platformer.Player
         {
             _deth = deth;
             _input = input;
+            _playerSpeed = _startSpeed;
         }
 
         void Update()
@@ -74,11 +74,15 @@ namespace Platformer.Player
 
         public void SlowDown(float value)
         {
-            _playerSpeed -= value;
+            _playerSpeed -= _playerSpeed * value/100;
 
             if (_playerSpeed < 0)
                 _playerSpeed = 0;
         }
       
+        public void ReturnSpeed()
+        {
+            _playerSpeed = _startSpeed;
+        }
     }
 }
