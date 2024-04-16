@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hummer: {fileID: 4340687925942229867}
-  _rotateDuration: 2
+  _rotateDuration: 3
   _angle: 80
 --- !u!1 &6900739469917256791
 GameObject:

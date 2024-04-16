@@ -1,13 +1,14 @@
-using Platformer.Service;
 using Platformer.Service.Input;
-using System;
 using UnityEngine;
 
 namespace Platformer.Player
 {
+    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(PlayerAnimator))]
     public class PlayerMove : MonoBehaviour
     {
         [SerializeField] private CharacterController _controller;
+        [SerializeField] private PlayerAnimator _playerAnimator;
         [Space]
         [SerializeField] private float _startSpeed = 2f;
         [SerializeField] private float _jumpHeight = 1.0f;
@@ -35,12 +36,18 @@ namespace Platformer.Player
                 _playerSpeed = 0;
         }
 
-        public void ReturnSpeed()
-        {
+        public void ReturnSpeed() => 
             _playerSpeed = _startSpeed;
-        }
 
         private void Update()
+        {
+            Move();
+            Jump();
+            Gravity();
+            Animate();
+        }
+
+        private void Move()
         {
             if (_controller.isGrounded && _playerVelocity.y < Constants.Epsilon)
                 _playerVelocity.y = 0f;
@@ -58,15 +65,30 @@ namespace Platformer.Player
 
             if (_move != Vector3.zero)
                 transform.forward = _move;
+        }
 
+        private void Animate()
+        {
+            if (Mathf.Abs(_move.x) > 0 || Mathf.Abs(_move.z) > 0)
+                _playerAnimator.PlayMove(true);
+            else
+                _playerAnimator.PlayMove(false);
+        }
+
+        private void Gravity()
+        {
+            _playerVelocity.y += -_gravityValue * Time.deltaTime;
+            _controller.Move(_playerVelocity * Time.deltaTime);
+        }
+
+        private void Jump()
+        {
             if (_input.IsJumpButtonUp() && _isTouchGround)
             {
                 _isTouchGround = false;
                 _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * -_gravityValue);
+                _playerAnimator.PlayJump();
             }
-
-            _playerVelocity.y += -_gravityValue * Time.deltaTime;
-            _controller.Move(_playerVelocity * Time.deltaTime);
         }
 
         private void OnCollisionEnter(Collision collision)

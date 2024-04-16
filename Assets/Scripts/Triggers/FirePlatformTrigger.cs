@@ -38,10 +38,10 @@ namespace Platformer.Triggers
 
         protected override void StopTrap()
         {
-            _isActive = false;
             StopAllCoroutines();
             RemoveMaterial();
             AddMaterial(_normalMaterial);
+            _isActive = false;
         }
 
         private IEnumerator TrapCoroutine()
