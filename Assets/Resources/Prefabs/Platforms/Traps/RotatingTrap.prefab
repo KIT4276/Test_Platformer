@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 6661467020700882237}
-  _rotateSpeed: 10
+  _rotateSpeed: 15
   _platformsTransform: {fileID: 9063467866101204472}
   _audio: {fileID: 0}
   _audioDecreaseStep: 0.03
