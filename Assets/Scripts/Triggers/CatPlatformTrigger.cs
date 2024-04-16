@@ -1,6 +1,7 @@
 ﻿using Platformer.Player;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Platformer.Triggers
 {
@@ -9,11 +10,13 @@ namespace Platformer.Triggers
         [SerializeField] private float _slowdownPercent = 50;
         [SerializeField] private float _speedReturnDelay = 5;
         [SerializeField] private LoadingVignetteCurtain _vignette;
+        [SerializeField] private GameObject _cake;
 
         protected override void LaunchTrap()
         {
             if (!_isActive)
             {
+                _cake.SetActive(false);
                 _player.GetComponent<PlayerMove>().SlowDown(_slowdownPercent);
                 _isActive = true;
                 _vignette.ShowVignette();
@@ -25,7 +28,6 @@ namespace Platformer.Triggers
             if (_isActive)
             {
                 StartCoroutine(SpeedReturnCoroutine());
-                _isActive = false;
             }
         }
 
@@ -34,6 +36,8 @@ namespace Platformer.Triggers
             yield return new WaitForSeconds(_speedReturnDelay);
             _vignette.HideVignette();
             _player.GetComponent<PlayerMove>().ReturnSpeed();
+            _cake.SetActive(true);
+            _isActive = false;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Platformer.Triggers
     public abstract class MainGameTrigger : MonoBehaviour
     {
         protected const string PlayerTag = "Player";
+        protected Collider _playersCollider;
 
         public event Action MainGameTriggerEnteredE;
 
@@ -13,6 +14,7 @@ namespace Platformer.Triggers
         {
             if (other.CompareTag(PlayerTag))
             {
+                _playersCollider = other;
                 TriggerEnter();
                 MainGameTriggerEnteredE?.Invoke();
                 gameObject.SetActive(false);

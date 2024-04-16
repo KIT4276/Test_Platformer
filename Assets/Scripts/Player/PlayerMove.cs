@@ -12,20 +12,17 @@ namespace Platformer.Player
         [SerializeField] private float _startSpeed = 2f;
         [SerializeField] private float _jumpHeight = 1.0f;
         [SerializeField] private float _gravityValue = 9.81f;
-        [SerializeField] private float _minY = 0;
 
         private float _playerSpeed;
         private Vector3 _playerVelocity;
-        private Death _deth;
         private IInputService _input;
         private Vector3 _move;
         private bool _isTouchGround = true;
 
         private const string GroundTag = "Ground";
 
-        public void Init(IInputService input, Death deth)
+        public void Init(IInputService input)
         {
-            _deth = deth;
             _input = input;
             _playerSpeed = _startSpeed;
         }
@@ -70,9 +67,6 @@ namespace Platformer.Player
 
             _playerVelocity.y += -_gravityValue * Time.deltaTime;
             _controller.Move(_playerVelocity * Time.deltaTime);
-
-            if (transform.position.y <= _minY)
-                _deth.OnDead();
         }
 
         private void OnCollisionEnter(Collision collision)

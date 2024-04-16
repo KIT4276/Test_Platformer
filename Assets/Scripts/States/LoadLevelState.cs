@@ -3,7 +3,6 @@ using Platformer.Logic;
 using Platformer.Service;
 using Platformer.Service.Input;
 using Platformer.Triggers;
-using System;
 using UnityEngine;
 
 namespace Platformer.States
@@ -20,7 +19,6 @@ namespace Platformer.States
         private readonly GameFactory _gameFactory;
         private readonly IInputService _input;
         private readonly Timer _timer;
-        private GameObject _playerObj;
 
         public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, 
             LoadingCurtain curtain, GameFactory gameFactory, IInputService input, Timer timer)
@@ -51,10 +49,8 @@ namespace Platformer.States
 
         private void InitGameWorld()
         {
-            _playerObj = InitPlayer();
-
             InitHud();
-            CameraFollow(_playerObj);
+            CameraFollow(InitPlayer());
             InitTimer();
         }
 
@@ -67,7 +63,7 @@ namespace Platformer.States
         }
 
         private void InitHud() => 
-            _gameFactory.CreateHud(_playerObj);
+            _gameFactory.CreateHud();
 
         private GameObject InitPlayer() =>
             _gameFactory.CreatePlayerAt(GameObject.FindWithTag(InitialPointTag), _input);

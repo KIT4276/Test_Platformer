@@ -11,9 +11,6 @@ namespace Platformer.Installers
     {
         [SerializeField] private GameObject _curtainPrefab;
         [SerializeField] private GameObject _entryPointPrefab;
-        [SerializeField] private GameObject _playerPrefab;
-        [SerializeField] private GameObject _hudPrefab;
-        [SerializeField] private GameObject _startMenuPrefab;
 
         private const string Curtain = "_curtain";
         private const string Infrastructure = "Infrastructure";
@@ -68,7 +65,6 @@ namespace Platformer.Installers
 
             Container.Bind<GameFactory>()
                 .AsSingle()
-                .WithArguments(_playerPrefab, _hudPrefab, _startMenuPrefab)
                 .NonLazy();
         }
 
