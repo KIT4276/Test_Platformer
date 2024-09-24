@@ -46,7 +46,6 @@ namespace Platformer.Triggers
 
         private IEnumerator TrapCoroutine()
         {
-
             AddMaterial(_activeMaterial);
 
             yield return new WaitForSeconds(_fireDelay);

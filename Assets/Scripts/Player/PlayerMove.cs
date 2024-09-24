@@ -18,9 +18,6 @@ namespace Platformer.Player
         private Vector3 _playerVelocity;
         private IInputService _input;
         private Vector3 _move;
-        private bool _isTouchGround = true;
-
-        private const string GroundTag = "Ground";
 
         public void Init(IInputService input)
         {
@@ -36,19 +33,21 @@ namespace Platformer.Player
                 _playerSpeed = 0;
         }
 
-        public void ReturnSpeed() => 
+        public void ReturnSpeed() =>
             _playerSpeed = _startSpeed;
 
         private void Update()
         {
-            Move();
             Jump();
+            Move();
             Gravity();
             Animate();
         }
 
         private void Move()
         {
+            
+            
             if (_controller.isGrounded && _playerVelocity.y < Constants.Epsilon)
                 _playerVelocity.y = 0f;
 
@@ -83,18 +82,12 @@ namespace Platformer.Player
 
         private void Jump()
         {
-            if (_input.IsJumpButtonUp() && _isTouchGround)
+            if (_input.IsJumpButtonUp() && _controller.isGrounded)
             {
-                _isTouchGround = false;
                 _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * -_gravityValue);
                 _playerAnimator.PlayJump();
-            }
-        }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.CompareTag(GroundTag))
-                _isTouchGround = true;
+            }
         }
     }
 }

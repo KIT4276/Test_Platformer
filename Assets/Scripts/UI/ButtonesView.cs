@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -6,11 +7,11 @@ namespace Platformer.UI
 {
     public class ButtonesView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private Image _buttosesImage;
-        [SerializeField] private Sprite _unenteredSprite;
-        [SerializeField] private Sprite _enteredSprite;
+        [SerializeField] protected Image _buttosesImage;
+        [SerializeField] protected Sprite _unenteredSprite;
+        [SerializeField] protected Sprite _enteredSprite;
 
-        private void Awake() => 
+        protected void Awake() => 
             _buttosesImage.sprite = _unenteredSprite;
 
         public void OnPointerEnter(PointerEventData eventData) => 

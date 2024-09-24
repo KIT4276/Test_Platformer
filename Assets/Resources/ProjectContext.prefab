@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _curtainPrefab: {fileID: 8493594776518678524, guid: 6f4cf927d2d67ce4c8fe0cb6ceed3d9e, type: 3}
   _entryPointPrefab: {fileID: 2678113589665379903, guid: 62f7b6192b68a43478bcf6505db3ed99, type: 3}
-  _playerPrefab: {fileID: 3187477010015734958, guid: a286f6d4eb147974dbd4150b924fc133, type: 3}
+  _playerPrefab: {fileID: 392569855949669136, guid: 6809529ae29922846b57fa4d45678129, type: 3}
   _hudPrefab: {fileID: 188881087513000827, guid: c8127086996c9d549a6a2502f63fc9c9, type: 3}
   _startMenuPrefab: {fileID: 4269048099873390238, guid: f1cd77b4ece9c124c8423802fae8ee73, type: 3}
 --- !u!1 &6886064092637678073
@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf556032ccd0c7f42b40462a9bd31534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &8782521962743653350
 GameObject:
   m_ObjectHideFlags: 0

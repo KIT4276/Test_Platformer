@@ -10,10 +10,10 @@ namespace Platformer.Player
         private static readonly int MoveHash = Animator.StringToHash("Moving");
         private static readonly int JumpHash = Animator.StringToHash("Jump");
 
-        public void PlayMove(bool isMoving) => 
+        public void PlayMove(bool isMoving) =>
             _animator.SetBool(MoveHash, isMoving);
 
-        public void PlayJump() => 
+        public void PlayJump() =>
             _animator.SetTrigger(JumpHash);
     }
 }
