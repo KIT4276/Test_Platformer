@@ -1,7 +1,8 @@
 <h1> Test_Platformer</h1>
  <h2>Open source test task</h2>
 
-<a href="https://drive.google.com/drive/folders/1jjMjQ-Xu5hG8VYig3nlwdZ_RnTfoaCeC?usp=sharing">Link to build</a> </h2>
+<a href="https://drive.google.com/drive/folders/1jjMjQ-Xu5hG8VYig3nlwdZ_RnTfoaCeC?usp=sharing">Link to build</a> </h2> <br>
+<a href="https://drive.google.com/file/d/1tQ8gSrQyY2LvzjpqKDy7igmmr8xwJsa8/view?usp=sharing">Link to video</a> </h2>
  
 
 Простой 3D платформер, в котором персонаж должен переместиться от точки 
